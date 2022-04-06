@@ -11,3 +11,4 @@ echo $cafetera->servirTaza(200);
 $cafetera->vaciarCafetera();
 
 echo $cafetera->agregarCafe(800);
+?>
