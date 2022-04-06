@@ -88,7 +88,7 @@ do{
 function menu(){
 
 
-    return $menu = "Elija una opción:\n
+    return "Elija una opción:\n
     1. Modificar el código.\n
     2. Modificar el destino.\n
     3. Modificar la cantidad de asientos del viaje.\n

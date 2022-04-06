@@ -133,7 +133,7 @@ class Viaje{
         Destino: {$this->getDestino()}.\n
         Capacidad: {$this->getPasajerosMax()}.\n
         Asientos ocupados: {$cantidadPasajeros}.\n
-        Datos de pasajeros: \n $pasajero";
+        Datos de pasajeros: $pasajero.\n";
 
         return $string;
 
