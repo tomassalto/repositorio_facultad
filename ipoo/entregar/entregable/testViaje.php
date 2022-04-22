@@ -1,5 +1,7 @@
 <?php
 include "Viaje.php";
+include "Pasajero.php";
+include "ResponsableV.php";
 
 echo "Bienvenido!\n";
 echo "Ingrese el codigo de viaje: \n";
@@ -8,9 +10,18 @@ echo "Ingrese el destino: \n";
 $destino = trim(fgets(STDIN));
 echo "Ingrese la máxima cantidad de asientos: \n";
 $cantidadAsientos = trim(fgets(STDIN));
+echo "Ingrese los datos del responsable del viaje: \n";
+echo "Numero de empleado: \n";
+$numEmpleado = trim(fgets(STDIN));
+echo "Numero de licencia: \n";
+$numLicencia = trim(fgets(STDIN));
+echo "Nombre: \n";
+$nombre = trim(fgets(STDIN));
+echo "Apellido: \n";
+$apellido = trim(fgets(STDIN));
 
-
-$objetoViaje = new Viaje($codigoViaje,$destino,$cantidadAsientos);
+$objResposable = new ResponsableV($numEmpleado,$numLicencia,$nombre,$apellido);
+$objetoViaje = new Viaje($codigoViaje,$destino,$cantidadAsientos, $objResposable);
 $finalizar = true;
 
 do{
@@ -42,8 +53,8 @@ do{
         case 4: 
             if($objetoViaje->consultarLugar()){
                 echo "Ingrese los datos de un pasajero: \n";
-                $pasajero = obtenerDatos();
-                if($objetoViaje->agregarPasajero($pasajero)){
+                $objPasajero = obtenerDatos();
+                if($objetoViaje->agregarPasajero($objPasajero)){
                     echo "El pasajero ha sido agregado!.\n";
                 }else{
                     echo "El pasajero ya se encuentra en el viaje.\n";
@@ -54,9 +65,9 @@ do{
             break;
 
         case 5: 
-            echo "Ingrese los datos del pasajero que quiere quitar: \n";
-            $pasajero = obtenerDatos();
-            if($objetoViaje->eliminarPasajero($pasajero)){
+            echo "Ingrese el dni del pasajero que quiere quitar: \n";
+            $dni = intval(trim(fgets(STDIN)));
+            if($objetoViaje->eliminarPasajero($dni)){
                 echo "El pasajero ha sido eliminado del viaje .\n";
             }else{
                 echo "No se encuentra el pasajero.\n";
@@ -64,11 +75,9 @@ do{
             break;
 
         case 6: 
-            echo "Ingrese los datos del pasajero a modificar: \n";
-            $pasajero = obtenerDatos();
-            echo "Ingrese los nuevos datos: \n";
-            $pasajero2 = obtenerDatos();
-            if($objetoViaje->modificarDatosPasajero($pasajero, $pasajero2)){
+            echo "Ingrese el dni del pasajero a modificar: \n";
+            $dniPasajero = intval(trim(fgets(STDIN)));       
+            if($objetoViaje->modificarDatosPasajero($dniPasajero)){
                 echo "Se han modificado correctamente los datos!.\n";
             }else{
                 echo "No se ha econtrado al pasajero para modificarlo.\n";
@@ -79,9 +88,31 @@ do{
             echo $objetoViaje;
             break;
 
+        
+        
+        case 8:
+            $responsable = $objetoViaje->getResponsableViaje();
+            echo $responsable;
+            break;
+    
+        case 9:
+            echo "Ingrese los nuevos datos del responsable: \n
+            Número de empleado: ";
+            $numEmpleado = trim(fgets(STDIN));
+            echo "Número de licencia: \n";
+            $numLicencia = trim(fgets(STDIN));
+            echo "Nombre: \n";
+            $nombre = trim(fgets(STDIN));
+            echo "Apellido: \n";
+            $apellido = trim(fgets(STDIN));
+            $objResponsable = new ResponsableV($numEmpleado, $numLicencia, $nombre, $apellido);
+            $objetoViaje->setResponsableViaje($objResponsable);
+            break;
+
         default:
             $finalizar = false;
-            break;    
+            break;
+
     }
 }while($finalizar);
 
@@ -96,7 +127,9 @@ function menu(){
     5. Quitar Pasajero. \n
     6. Modificar Pasajero. \n
     7. Ver viaje. \n
-    8. Salir. \n";
+    8. Ver datos del responsable. \n
+    9. Modificar datos del responsable. \n
+    10. Salir. \n";
 }
 
 function obtenerDatos(){
@@ -107,7 +140,9 @@ function obtenerDatos(){
     $apellido = trim(fgets(STDIN));
     echo "DNI: \n";
     $dni = intval(trim(fgets(STDIN)));
-    $pasajero = ['nombre'=>$nombre, 'apellido'=>$apellido, 'DNI'=>$dni];
-    return $pasajero;
+    echo "Telefono: \n";
+    $telefono = trim(fgets(STDIN));
+    $objPasajero = new Pasajero($nombre, $apellido, $dni, $telefono);
+    return $objPasajero;
 }
 ?>
