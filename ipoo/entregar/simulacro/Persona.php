@@ -10,13 +10,13 @@ class Persona{
     private $telefono;
     private $neto;
 
-    public function __construct($nombre,$apellido,$direc,$mail,$dni,$tel,$neto){
+    public function __construct($nombre,$apellido,$dni,$direc,$mail,$tel,$neto){
 
         $this->nombre = $nombre;
         $this->apellido = $apellido;
-        $this->direccion = $direc;
-        $this->mail = $mail;
         $this->dni = $dni;
+        $this->direccion = $direc;
+        $this->mail = $mail;      
         $this->telefono = $tel;
         $this->neto = $neto;
     } 
@@ -60,43 +60,48 @@ class Persona{
 
     public function setNombre($nombres){
 
-        return $this->nombre = $nombres;
+       $this->nombre = $nombres;
     }
 
     public function setApellido($apellidos){
 
-        return $this->apellido = $apellidos;
+         $this->apellido = $apellidos;
     }
 
     public function setDireccion($direc){
 
-        return $this->direccion = $direc;
+         $this->direccion = $direc;
     }
 
     public function setDni($dniPersona){
 
-        return $this->dni = $dniPersona;
+         $this->dni = $dniPersona;
     }
 
     public function setMail($email){
 
-        return $this->mail = $email;
+         $this->mail = $email;
     }
 
     public function setTelefono($tel){
 
-        return $this->telefono = $tel;
+         $this->telefono = $tel;
     }
 
-    public function setNeto($netos){
+    public function setNeto($neto){
 
-        return $this->neto = $netos;
+         $this->neto = $neto;
     }
-
-    
+    //toString
+    public function __toString(){
+        
+        $str = "
+        Nombre: {$this->getNombre()}. Apellido: {$this->getApellido()}. DNI: {$this->getDni()}. Dirección: {$this->getDireccion()}.
+        Mail: {$this->getMail()}. Telefono: {$this->getTelefono()}. Neto: \${$this->getNeto()}.
+        ";
+        return $str;
+    }
 }
-
-
 
 
 ?>
