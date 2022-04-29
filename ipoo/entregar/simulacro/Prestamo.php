@@ -2,7 +2,6 @@
 require_once('Cuota.php') ;
 require_once('Persona.php');
 class Prestamo{
-
     private $identificacion;
     private $codigoElectrodomestico;
     private $fechaOtorgamiento = 'No aprobado.';
