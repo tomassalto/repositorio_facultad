@@ -51,7 +51,7 @@ class Terminal{
        $arrayEmpresas = $this->getColeccionEmpresas();
        $booleano = true;
        $i = 0;
-       while($booleano && $i < count($arrayEmpresas)){
+       while($booleano && $i <= count($arrayEmpresas)){
             $viajeSeleccionado = $arrayEmpresas[$i];
             $venta = $viajeSeleccionado->venderViajeADestino($cantAsientos,$destino);
             if($venta){
