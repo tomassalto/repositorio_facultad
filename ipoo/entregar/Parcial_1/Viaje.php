@@ -23,6 +23,7 @@ class Viaje{
         $this->cantidadMaxAsientos = $cantidadMaxAsientos;
         $this->asientosDisponibles = $asientosDisponibles;
         $this->objPersona = $objPersona;
+        
     }
 
     //getters y setters
