@@ -2,8 +2,8 @@
 class CuentaCorriente extends Cuenta{     
     private $saldoMax;
 
-    public function __construct($saldoActual,$objPersona,$saldoMax){
-        parent::__construct($saldoActual,$objPersona);
+    public function __construct($objPersona,$saldoMax){
+        parent::__construct($objPersona);
         $this->saldoMax = $saldoMax;
     }
 

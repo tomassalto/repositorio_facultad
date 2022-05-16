@@ -1,8 +1,8 @@
 <?php
 class CajaAhorro extends Cuenta{
 
-    public function __construct($saldoActual,$objPersona){
-        parent::__construct($saldoActual,$objPersona);
+    public function __construct($objPersona){
+        parent::__construct($objPersona);
     }
 
     public function realizarRetiro($monto){        

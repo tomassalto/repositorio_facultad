@@ -3,8 +3,8 @@ class Cuenta{
     private $saldoActual;
     private $objPersona;
 
-    public function __construct($saldoActual,$objPersona){
-        $this->saldoActual = $saldoActual;
+    public function __construct($objPersona){
+        $this->saldoActual = 0;
         $this->objPersona = $objPersona;
     }
 
