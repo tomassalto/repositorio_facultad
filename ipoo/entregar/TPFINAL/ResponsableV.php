@@ -107,6 +107,33 @@ class ResponsableV{
         return $resp;
     }
 
+    public function listar($condicion = ''){
+	    $resp = null;
+        $baseDatos = new BaseDatos();
+		$consultaResponsable="SELECT * FROM responsable ";
+		if($condicion != ""){
+		    $consultaResponsable .=' where '.$condicion;
+		}
+		if($baseDatos->iniciar()){
+			if($baseDatos->ejecutar($consultaResponsable)){
+                $resp = [];		
+				while($responsable=$baseDatos->registro()){		
+                    $objResponsable = new ResponsableV();
+                    $objResponsable->buscar($responsable['rnumeroempleado']);
+                    array_push($resp, $objResponsable);
+				}
+		 	}else{
+                $resp = false;
+                $this->setMensajeError($baseDatos->getERROR());
+			}
+		 }else{
+            $resp = false;
+            $this->setMensajeError($baseDatos->getERROR());
+		 }		
+		 return $resp;
+	}
+
+
     /**
      * Este modulo modifica un pasajero de la BD.
     */
@@ -152,32 +179,7 @@ class ResponsableV{
 		 return $resp;
 	}
 
-    public function listar($condicion = ''){
-	    $resp = null;
-        $baseDatos = new BaseDatos();
-		$consultaResponsable="SELECT * FROM responsable ";
-		if($condicion != ""){
-		    $consultaResponsable .=' where '.$condicion;
-		}
-		if($baseDatos->iniciar()){
-			if($baseDatos->ejecutar($consultaResponsable)){
-                $resp = [];		
-				while($responsable=$baseDatos->registro()){		
-                    $objResponsable = new ResponsableV();
-                    $objResponsable->buscar($responsable['rnumeroempleado']);
-                    array_push($resp, $objResponsable);
-				}
-		 	}else{
-                $resp = false;
-                $this->setMensajeError($baseDatos->getERROR());
-			}
-		 }else{
-            $resp = false;
-            $this->setMensajeError($baseDatos->getERROR());
-		 }		
-		 return $resp;
-	}
-
+    
 	public function __toString()
 	{
 		return ("El nombre del responsable del viaje es: ".$this->getNombre()."\n".

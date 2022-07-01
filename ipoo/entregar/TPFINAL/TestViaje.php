@@ -5,6 +5,8 @@ require_once('Viaje.php');
 require_once('Pasajero.php');
 require_once('BD.php');
 
+//funciones
+
 function menuModificar(){
 $estado = true;       
     while($estado){
@@ -22,7 +24,7 @@ $estado = true;
                 switch($rta){
                     case '1':
                         //modificar viaje
-                        echo "Ingrese el número de viaje: \n";
+                        echo "Ingrese el ID de viaje: \n";
                         $idViaje = intval(trim(fgets(STDIN)));
                         $objViaje = new Viaje();
                         if ($objViaje->buscar($idViaje)) {
@@ -37,27 +39,27 @@ $estado = true;
                             if($vcantmaxpasajeros != 0){
                                 $objViaje->setVCantidadMax($vcantmaxpasajeros);
                             }
-                            $quedar = true;
-                            while ($quedar) {
-                                echo "Ingrese el id de una empresa existente: \n";
+                            $estadoCase = true;
+                            while ($estadoCase) {
+                                echo "Ingrese el ID de una empresa existente: \n";
                                 $idEmpresa = intval(trim(fgets(STDIN)));
                                 $objEmpresa = new Empresa();
                                 if (!$objEmpresa->buscar($idEmpresa)) {
                                     echo "No existe dicha empresa.\n";
                                 } else {
-                                    $quedar = false;
+                                    $estadoCase = false;
                                 }
                             }
                             $objViaje->setObjEmpresa($objEmpresa);
-                            $quedar = true;
-                            while ($quedar) {
-                                echo "Ingrese el numero de un responsable existente: \n";
+                            $estadoCase = true;
+                            while ($estadoCase) {
+                                echo "Ingrese el ID de un responsable existente: \n";
                                 $rnumeroempleado = intval(trim(fgets(STDIN)));
                                 $objResponsable = new ResponsableV();
                                 if (!$objResponsable->buscar($rnumeroempleado)) {
                                     echo "No existe el empleado.\n";
                                 } else {
-                                    $quedar = false;
+                                    $estadoCase = false;
                                 }
                             }
                             $objViaje->setObjResponsable($objResponsable);
@@ -95,7 +97,7 @@ $estado = true;
 
                     case '2':
                             //Modificar pasajero 
-                            echo "Ingrese el documento de un pasajero: \n";
+                            echo "Ingrese el DNI de un pasajero: \n";
                             $dni = intval(trim(fgets(STDIN)));
                             $objPasajero = new Pasajero();
                             if ($objPasajero->buscar($dni)) {
@@ -115,16 +117,16 @@ $estado = true;
                                 if ($telefonoPas != '') {
                                     $objPasajero->setTelefono($telefonoPas);
                                 }
-                                $quedar = true;
-                                while ($quedar) {
-                                    echo "Ingrese el id de un viaje existente: \n";
+                                $estadoCase = true;
+                                while ($estadoCase) {
+                                    echo "Ingrese el ID de un viaje existente: \n";
                                     $idViaje = intval(trim(fgets(STDIN)));
                                     $objViaje = new Viaje();
                                     if (!$objViaje->buscar($idViaje)) {
                                         echo "No existe dicho viaje.\n"
                                         ."--------------------";;
                                     } else {
-                                        $quedar = false;
+                                        $estadoCase = false;
                                     }
                                 }
                                 if ($objPasajero->modificar()) {
@@ -142,7 +144,7 @@ $estado = true;
 
                         case '3':
                                 //modificar empresa
-                                echo "Ingrese el número de empresa: \n";
+                                echo "Ingrese el ID de empresa: \n";
                                 $idempresa = intval(trim(fgets(STDIN)));
                                 $objEmpresa = new Empresa();
                                 if ($objEmpresa->buscar($idempresa)) {
@@ -152,20 +154,15 @@ $estado = true;
                                     echo "Ingrese la dirección: \n";
                                     $edireccion = trim(fgets(STDIN));
                                     $objEmpresa->setNombre($enombre);
-                                    $objEmpresa->setDireccion($edireccion);
-                                    //if ($objEmpresa->cargarDatos($idempresa, $enombre, $edireccion)) {
+                                    $objEmpresa->setDireccion($edireccion);                                    
                                         if ($objEmpresa->modificar()) {
                                             echo "Se ha modificado la empresa.\n"
                                             ."--------------------";
-                                        } else {
+                                        }else {
                                             echo "No se ha modificado la empresa.\n"
                                             ."--------------------";
                                             echo $objEmpresa->getMensajeError();
-                                        }
-                                    /*} else {
-                                        echo "No se han ingresado los datos.\n";
-                                        echo $objEmpresa->getMensajeOp();
-                                    }*/
+                                        }                                  
                                 } else {
                                     echo "No existe la empresa.\n"
                                     ."--------------------";
@@ -174,7 +171,7 @@ $estado = true;
 
                             case '4':
                                     //modificar responsable
-                                    echo "Ingrese el número de empleado: \n";
+                                    echo "Ingrese el ID de empleado: \n";
                                     $rnumero = intval(trim(fgets(STDIN)));
                                     $objResponsable = new ResponsableV();
                                     if ($objResponsable->buscar($rnumero)) {
@@ -243,40 +240,52 @@ function menuAgregar(){
                switch($rta){
                     case '1':
                         //crear viaje 
-                        $quedarse = true;
-                        while ($quedarse) {
-                            echo "Ingrese el id del viaje: \n";
+                        $estadoCase = true;
+                        while ($estadoCase) {
+                            echo "Ingrese el ID del viaje: \n";
                             $idViaje = intval(trim(fgets(STDIN)));
                             $objViaje = new Viaje();
                             if($objViaje->buscar($idViaje)){
-                                echo "El id de viaje ya esta utilizado.\n"
+                                echo "El ID de viaje ya esta utilizado.\n"
                                 ."--------------------";
                             }else{
                                 $objViaje->setIdviaje($idViaje);
-                                $quedarse = false;
+                                $estadoCase = false;
                             }
                             echo "Ingrese el destino: \n";
                             $vdestino = trim(fgets(STDIN));
                             $objViaje->setVdestino($vdestino);
+                            $arrayObjViaje = $objViaje->listar("");
+                            $i = 0;
+                            $estado = true;
+                            while($estado && ($i < count($arrayObjViaje))){
+                                if($arrayObjViaje[$i]->getVDestino() == $vdestino){                                    
+                                    echo "Su destino ya existe.\n";
+                                    $estado = false;
+                                    $estadoCase = false;
+                                }else{
+                                    $i++;
+                                }
+                            }                            
                             echo "Ingrese la cantidad máxima de pasajeros: \n";
                             $vcantmaxpasajeros = intval(trim(fgets(STDIN)));
                             $objViaje->setVCantidadMax($vcantmaxpasajeros);
-                            $quedarse = true;
-                            while ($quedarse) {
-                                echo "Ingrese el id de una empresa existente: \n";
+                            $estadoCase = true;
+                            while ($estadoCase) {
+                                echo "Ingrese el ID de una empresa existente: \n";
                                 $idEmpresa = intval(trim(fgets(STDIN)));
                                 $objEmpresa = new Empresa();
                                 if($objEmpresa->buscar($idEmpresa)){
-                                    $quedarse = false;
+                                    $estadoCase = false;
                                     $objViaje->setObjEmpresa($objEmpresa);
                                    
                                 }else{
-                                    echo "Dicho id de empresa no existe.\n"
+                                    echo "Dicho ID de empresa no existe.\n"
                                     ."--------------------";
                                 }
                             }
-                            $quedarse = true;
-                            while ($quedarse) {
+                            $estadoCase = true;
+                            while ($estadoCase) {
                                 echo "Ingrese el número de un responsable.\n";
                                 $rnumeroempleado = intval(trim(fgets(STDIN)));
                                 $objResponsable = new ResponsableV();
@@ -284,7 +293,7 @@ function menuAgregar(){
                                     echo "Dicho responsable no existe.\n"
                                     ."--------------------";
                                 }else{
-                                    $quedarse = false;
+                                    $estadoCase = false;
                                     $objViaje->setObjResponsable($objResponsable);
                                 }
                             }
@@ -329,7 +338,7 @@ function menuAgregar(){
                                 $objPasajero->setTelefono($telefonoPas);
                                 $quedar = true;
                                 while($quedar){
-                                    echo "Ingrese el número de viaje existente: \n";
+                                    echo "Ingrese el ID de viaje existente: \n";
                                     $idViaje = intval(trim(fgets(STDIN)));
                                     $objViaje = new Viaje();
                                     if($objViaje->buscar($idViaje)){
@@ -354,16 +363,16 @@ function menuAgregar(){
 
                     case '3':
                             //cargar empresa
-                            $quedar = true;
-                            while ($quedar) {
-                                echo "Ingrese el id de la empresa: \n";
+                            $estadoCase = true;
+                            while ($estadoCase) {
+                                echo "Ingrese el ID de la empresa: \n";
                                 $idEmpresa = intval(trim(fgets(STDIN)));
                                 $objEmpresa = new Empresa();
                                 if($objEmpresa->buscar($idEmpresa)){
-                                    echo "El id ya esta utilizado.\n"
+                                    echo "El ID ya esta utilizado.\n"
                                     ."--------------------";
                                 }else{
-                                    $quedar = false;
+                                    $estadoCase = false;
                                     $objEmpresa->setIdentificacion($idEmpresa);
                                 }
                             }
@@ -448,8 +457,8 @@ function menuEliminar(){
             switch($rta){
                 case '1':
                     //eliminar viaje
-                    echo "Recuerde que para eliminar un viaje no debe haber pasajeros añadidos en el mismo.\n";
-                    echo "Ingrese el número de viaje: \n";
+                    echo "IMPORTANTE!! No debe haber pasajeros añadidos en el viaje si desea eliminarlo.\n";
+                    echo "Ingrese el ID de viaje: \n";
                     $idViaje = intval(trim(fgets(STDIN)));
                     $objViaje = new Viaje();
                     if ($objViaje->buscar($idViaje)) {

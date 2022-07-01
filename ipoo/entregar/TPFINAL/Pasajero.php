@@ -4,7 +4,7 @@ class Pasajero{
     private $apellido;
     private $documento;
     private $telefono;
-    private $objViaje;
+    private $objViaje; //obj
     private $mensajeError;
 
     public function setTelefono($telefono){
@@ -73,28 +73,7 @@ class Pasajero{
         $this->setObjViaje($objViaje);
     }
 
-    /**
-     * Este modulo agrega un pasajero de la BD.
-    */
-    public function insertar(){
-        $baseDatos = new BaseDatos();
-        $resp = null;
-        $consulta = "INSERT INTO pasajero (pdocumento, pnombre, papellido, ptelefono, idviaje) 
-                    VALUES (".$this->getDocumento().",'".$this->getNombre()."','".$this->getApellido()."',".$this->getTelefono().",".$this->getObjViaje()->getIdViaje().")";
-        if($baseDatos->iniciar()){
-            if($baseDatos->ejecutar($consulta)){
-                $resp = true;
-            }else{
-                $resp = false;
-                $this->setMensajeError($baseDatos->getERROR());
-            }
-        }else{
-            $resp = false;
-            $this->setMensajeError($baseDatos->getERROR());
-        }
-        return $resp;
-    }
-
+      
     /**
      * Este modulo modifica un pasajero de la BD.
     */
@@ -194,6 +173,26 @@ class Pasajero{
 		 }		
 		 return $resp;
 	}
+
+    public function insertar(){
+        $baseDatos = new BaseDatos();
+        $resp = null;
+        $consulta = "INSERT INTO pasajero (pdocumento, pnombre, papellido, ptelefono, idviaje) 
+                    VALUES (".$this->getDocumento().",'".$this->getNombre()."','".$this->getApellido()."',".$this->getTelefono().",".$this->getObjViaje()->getIdViaje().")";
+        if($baseDatos->iniciar()){
+            if($baseDatos->ejecutar($consulta)){
+                $resp = true;
+            }else{
+                $resp = false;
+                $this->setMensajeError($baseDatos->getERROR());
+            }
+        }else{
+            $resp = false;
+            $this->setMensajeError($baseDatos->getERROR());
+        }
+        return $resp;
+    }
+
 
     public function __toString()
     {

@@ -53,24 +53,7 @@ class Empresa {
     /**
      * Este modulo agrega un pasajero de la BD.
     */
-    public function insertar(){
-        $baseDatos = new BaseDatos();
-        $resp = null;
-        $consulta = "INSERT INTO empresa (enombre, edireccion) 
-                    VALUES ('".$this->getNombre()."','".$this->getDireccion()."')";
-        if($baseDatos->iniciar()){
-            if($baseDatos->ejecutar($consulta)){
-                $resp = true;
-            }else{
-                $resp = false;
-                $this->setMensajeError($baseDatos->getERROR());
-            }
-        }else{
-            $resp = false;
-            $this->setMensajeError($baseDatos->getERROR());
-        }
-        return $resp;
-    }
+    
 
     /**
      * Este modulo modifica un pasajero de la BD.
@@ -139,6 +122,25 @@ class Empresa {
 		 }		
 		 return $resp;
 	}
+
+    public function insertar(){
+        $baseDatos = new BaseDatos();
+        $resp = null;
+        $consulta = "INSERT INTO empresa (enombre, edireccion) 
+                    VALUES ('".$this->getNombre()."','".$this->getDireccion()."')";
+        if($baseDatos->iniciar()){
+            if($baseDatos->ejecutar($consulta)){
+                $resp = true;
+            }else{
+                $resp = false;
+                $this->setMensajeError($baseDatos->getERROR());
+            }
+        }else{
+            $resp = false;
+            $this->setMensajeError($baseDatos->getERROR());
+        }
+        return $resp;
+    }
 
     public function listar($condicion = ''){
 	    $resp = null;

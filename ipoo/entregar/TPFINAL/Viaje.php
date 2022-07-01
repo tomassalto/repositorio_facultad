@@ -4,8 +4,8 @@ class Viaje{
     private $vDestino;
     private $vCantidadMax;
     private $arrayObjPasajero;
-    private $objEmpresa;
-    private $objResponsable;
+    private $objEmpresa;//obj
+    private $objResponsable;//obj
     private $vImporte;    
     private $tipoAsiento;
     private $idaVuelta;    
