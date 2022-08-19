@@ -38,7 +38,32 @@
             <div class="invalid-feedback">
             Please provide a valid city.
             </div>
-        </div>     
+        </div>
+        
+        <div class="col-md-4">  
+            <p>Selecciona tus estudios:</p>
+            <input type="radio" id="estudios1"
+            name="estudios" value="1- No tiene estudios">
+            <label for="contactChoice1">1- No tiene estudios</label>
+
+            <input type="radio" id="estudios2"
+            name="estudios" value="2- Estudios primarios">
+            <label for="contactChoice1">2- Estudios primarios</label>
+
+            <input type="radio" id="estudios3"
+            name="estudios" value="3- Estudios secundarios">
+            <label for="contactChoice1">3- Estudios secundarios</label>
+        </div>
+        </div> 
+        <div class="col-md-4">
+            <p>Selecciona tu sexo:</p>
+            <select name="select">
+                <option value="value1">Masculino</option>
+                <option value="value2" selected>Femenino</option>
+                <option value="value3">Prefiero no especificar</option>
+            </select>        
+              
+        </div> 
         <div class="col-md-4">
             <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
@@ -52,7 +77,8 @@
         </div>
         <div class="col-12">
             <button class="btn btn-primary" type="submit">Submit form</button>
-        </div>
+        </div>    
+        
         </form>
 </body>
 </html>
