@@ -16,7 +16,7 @@
         <form class="" action="../control/mostarpelis.php" method="POST" onsubmit="return validar();" novalidate>
             <fieldset class="titulo">
                 <legend>
-                    Cinem@ Cuevana
+                    CineMark
                 </legend>
             </fieldset>
             <div class="alert alert-warning error" id="error" role="alert">

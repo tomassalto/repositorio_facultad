@@ -9,7 +9,7 @@
 <body>
     <form id="form" name="form" method="post" action="../control/ej1.php">
         <label for="exampleInputEmail1" class="form-label" id="usuario_border">Ingrese un numero: </label>
-        <input name="numero" id="numero">
+        <input type="number" name="numero" id="numero">
         <button type="submit">Verificar</button>
     </form>
 </body>

@@ -7,27 +7,27 @@
     <title>Document</title>
 </head>
 <body>
-    <form id="form1" name="form1" method="get" action="../control/ej2.php">
+    <form id="form1" name="form1" method="post" action="../control/ej2.php">
         <label>Ingrese una hora:</label>
         <br>
         <label for="lunes">Lunes:</label>
-        <input id="lunes" name="lunes">
+        <input type="number" id="lunes" name="lunes">
         <br>
         <br>
         <label for="martes">Martes:</label>
-        <input id="martes" name="martes">
+        <input type="number" id="martes" name="martes">
         <br>
         <br>
         <label for="miercoles">Miercoles:</label>
-        <input id="miercoles" name="miercoles">
+        <input type="number" id="miercoles" name="miercoles">
         <br>
         <br>
         <label for="jueves">Jueves:</label>
-        <input id="jueves" name="jueves">
+        <input type="number" id="jueves" name="jueves">
         <br>
         <br>
         <label for="viernes">Viernes:</label>
-        <input id="viernes" name="viernes">
+        <input type="number" id="viernes" name="viernes">
         <br>
         <button type="submit">Verificar</button>
 
